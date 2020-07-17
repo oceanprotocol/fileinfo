@@ -6,8 +6,7 @@
   "homepage": "https://oceanprotocol.com",
   "scripts": {
     "start": "vercel dev",
-    "build": "",
-    "test": "npm run lint",
+    "test": "npm run lint && npm run type-check",
     "lint": "eslint --ignore-path .gitignore --ext .js --ext .ts --ext .tsx .",
     "format": "prettier --ignore-path .gitignore './**/*.{css,yml,js,ts,tsx,json}' --write",
     "type-check": "tsc --noEmit"

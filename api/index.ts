@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios'
 import { IncomingHttpHeaders } from 'http'
 import { ipfsGatewayUri } from '../config'
 
-interface ResponseResult {
+export interface ResponseResult {
   contentLength?: string
   contentType?: string
 }
@@ -74,7 +74,7 @@ export default async (req: NowRequest, res: NowResponse) => {
       break
     default:
       res.setHeader('Allow', ['POST'])
-      res.status(405).end(`<strong><code>
+      res.status(405).send(`<strong><code>
       🐙 <br />
       Ocean Protocol File Info API<br />
       <a href="https://github.com/oceanprotocol/fileinfo" style="text-decoration:none;color:#f6388a">github.com/oceanprotocol/fileinfo</a>
