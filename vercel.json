@@ -1,3 +1,9 @@
 {
-  "routes": [{ "src": "/", "dest": "/api" }]
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/api",
+      "headers": { "Access-Control-Allow-Origin": "*" }
+    }
+  ]
 }
