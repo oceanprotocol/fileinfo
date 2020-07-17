@@ -6,7 +6,7 @@
 > https://fileinfo.oceanprotocol.com
 
 [![Build Status](https://travis-ci.com/oceanprotocol/fileinfo.svg?branch=main)](https://travis-ci.com/oceanprotocol/fileinfo)
-[![Vercel deployment](https://flat.badgen.net/badge/now/auto-deployment/21c4dd?icon=now)](https://zeit.co/oceanprotocol/fileinfo)
+[![Vercel deployment](https://flat.badgen.net/badge/vercel/auto-deployment/21c4dd?icon=now)](https://zeit.co/oceanprotocol/fileinfo)
 [![js oceanprotocol](https://img.shields.io/badge/js-oceanprotocol-7b1173.svg)](https://github.com/oceanprotocol/eslint-config-oceanprotocol)
 
 **Table of Contents**
@@ -19,7 +19,7 @@
 
 ## 🏄 Usage
 
-API supports passing `http(s)://` & `ipfs://` URLs. IPFS URLs are mapped to the configured IPFS gateway.
+API supports passing `http(s)://` & `ipfs://` URLs via a `POST` request. IPFS URLs are mapped to the configured IPFS gateway.
 
 ### Endpoint
 
@@ -45,8 +45,8 @@ _Success_
 {
   "status": "success",
   "result": {
-    "contentLength": "",
-    "contentType": ""
+    "contentLength": "2989228",
+    "contentType": "application/pdf"
   }
 }
 ```
