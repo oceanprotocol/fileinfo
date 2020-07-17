@@ -73,8 +73,7 @@ export default async (req: NowRequest, res: NowResponse) => {
       res.status(200).json(await checkUrl(req.body.url))
       break
     default:
-      res.setHeader('Allow', ['POST'])
-      res.status(405).send(`<strong><code>
+      res.status(200).send(`<strong><code>
       🐙 <br />
       Ocean Protocol File Info API<br />
       <a href="https://github.com/oceanprotocol/fileinfo" style="text-decoration:none;color:#f6388a">github.com/oceanprotocol/fileinfo</a>
