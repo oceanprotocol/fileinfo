@@ -52,15 +52,11 @@ async function checkUrl(url: string): Promise<FileResponse> {
       headers: { Range: 'bytes=0-' }
     })
 
-    if (!response || response.status !== 200) {
-      return { status: 'error', message: 'Unknown Error' }
-    }
-
     const { headers, status } = response
     const successResponses =
       status.toString().startsWith('2') || status.toString().startsWith('416')
 
-    if (!successResponses) {
+    if (!response && !successResponses) {
       return { status: 'error', message: 'Unknown Error' }
     }
 
