@@ -1,5 +1,5 @@
 import { NowRequest, NowResponse } from '@vercel/node'
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosResponse, Method } from 'axios'
 import { IncomingHttpHeaders } from 'http'
 import { ipfsGatewayUri } from '../config'
 
@@ -34,7 +34,10 @@ function successResult(headers: IncomingHttpHeaders): FileResponse {
   return { status: 'success', result }
 }
 
-async function checkUrl(url: string): Promise<FileResponse> {
+async function checkUrl(
+  url: string,
+  httpMethod: Method
+): Promise<FileResponse> {
   if (!url) {
     return { status: 'error', message: 'missing url' }
   }
@@ -47,7 +50,7 @@ async function checkUrl(url: string): Promise<FileResponse> {
 
   try {
     const response: AxiosResponse = await axios({
-      method: 'HEAD',
+      method: httpMethod,
       url,
       headers: { Range: 'bytes=0-' }
     })
@@ -67,10 +70,21 @@ async function checkUrl(url: string): Promise<FileResponse> {
   }
 }
 
+async function checkIfUrlExists(url: string): Promise<FileResponse> {
+  const headCheck = await checkUrl(url, 'HEAD')
+
+  if (headCheck.status !== 'error') {
+    return headCheck
+  } else {
+    const optionsCheck = await checkUrl(url, 'OPTIONS')
+    return optionsCheck
+  }
+}
+
 export default async (req: NowRequest, res: NowResponse) => {
   switch (req.method) {
     case 'POST':
-      res.status(200).json(await checkUrl(req.body.url))
+      res.status(200).json(await checkIfUrlExists(req.body.url))
       break
     default:
       res.status(200).send(`<strong><code>
